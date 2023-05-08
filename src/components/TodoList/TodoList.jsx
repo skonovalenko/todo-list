@@ -2,15 +2,15 @@ import React from "react";
 import { List } from "antd";
 import TodoItem from "../TodoItem/TodoItem";
 
-const TodoList = ({ todos, deleteTodo }) => {
+const TodoList = ({ todos, deleteTodo, editTodo }) => {
   return (
     <List
-      style={{ minWeight: "60vw" }}
+        style={{ width: "37.5vw"}}
       pagination={{ pageSize: "5" }}
       itemLayout="horizontal"
       dataSource={todos}
       renderItem={(item, index) => (
-        <TodoItem todo={item} deleteTodo={deleteTodo} />
+        <TodoItem todo={item} deleteTodo={deleteTodo} editTodo={editTodo}/>
       )}
     />
   );

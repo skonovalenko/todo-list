@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import cl from "./TodoItem.module.css";
-import { List, Checkbox, Modal, Button } from "antd";
+import { List, Checkbox, Modal, Typography, Input } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
-
-const TodoItem = ({ todo, deleteTodo }) => {
-  const [isEditing, setIsEditing] = useState(false);
+const { Text, Link } = Typography;
+const TodoItem = ({ todo, deleteTodo, editTodo}) => {
   const [isCompleted, setIsCompleted] = useState(todo.completed);
   let rootClasses = [];
 
@@ -16,6 +15,7 @@ const TodoItem = ({ todo, deleteTodo }) => {
   };
 
   const onChange = (e) => {
+    console.log(e.target);
     setIsCompleted(!isCompleted);
     getCheckedTodos();
   };
@@ -32,9 +32,12 @@ const TodoItem = ({ todo, deleteTodo }) => {
       onOk: () => onDeleteTodo(),
     });
   };
+const onEditTodo = (value) => {
+  editTodo({...todo, title: value})
+}
   return (
     <List.Item
-      style={{ padding: "0.7em 1em", width: "100%" }}
+      style={{ padding: "0.7em 1em", width: "100%", minHeight: '4em' }}
       className={rootClasses.join(" ")}
     >
       <Checkbox
@@ -42,8 +45,8 @@ const TodoItem = ({ todo, deleteTodo }) => {
         checked={isCompleted}
         onChange={onChange}
       >
-        <span>{todo.title}</span>
       </Checkbox>
+      <Text editable={{tooltip: false, autoSize: false, onChange: onEditTodo}} className={cl.todo__text}>{todo.title}</Text>
       <DeleteOutlined
         onClick={() => confirmDeleteCategory()}
         style={{ color: "red", marginLeft: 12 }}

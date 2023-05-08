@@ -20,3 +20,10 @@
   text-decoration: none;
   font-style: normal;
 }
+.todo__text {
+  max-height: 4em;
+  width: 31vw;
+  margin-left: 1em;
+  overflow: auto;
+  overflow-wrap: break-word;
+}
